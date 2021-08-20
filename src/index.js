@@ -83,6 +83,21 @@ class Spreadsheet {
     return this;
   }
 
+  loadSheet(data) {
+    const ds = Array.isArray(data) ? data : [data];
+    if (ds.length > 0) {
+      for (let i = 0; i < ds.length; i += 1) {
+        const it = ds[i];
+        const nd = this.addSheet(it.name, i === 0);
+        nd.setData(it);
+        if (i === 0) {
+          this.sheet.resetData(nd);
+        }
+      }
+    }
+    return this;
+  }
+
   getData() {
     return this.datas.map(it => it.getData());
   }
