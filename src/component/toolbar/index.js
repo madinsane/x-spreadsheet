@@ -114,62 +114,62 @@ export default class Toolbar {
       [
         this.undoEl = new Undo(),
         this.redoEl = new Redo(),
-        new Print(),
-        this.paintformatEl = new Paintformat(),
-        this.clearformatEl = new Clearformat(),
-      ],
-      buildDivider(),
-      [
-        this.formatEl = new Format(),
-      ],
-      buildDivider(),
-      [
-        this.fontEl = new Font(),
-        this.fontSizeEl = new FontSize(),
-      ],
-      buildDivider(),
-      [
-        this.boldEl = new Bold(),
-        this.italicEl = new Italic(),
-        this.underlineEl = new Underline(),
-        this.strikeEl = new Strike(),
-        this.textColorEl = new TextColor(style.color),
-      ],
-      buildDivider(),
-      [
-        this.fillColorEl = new FillColor(style.bgcolor),
-        this.borderEl = new Border(),
-        this.mergeEl = new Merge(),
-      ],
-      buildDivider(),
-      [
-        this.alignEl = new Align(style.align),
-        this.valignEl = new Valign(style.valign),
-        this.textwrapEl = new Textwrap(),
-      ],
-      buildDivider(),
-      [
+        //new Print(),
+        //this.paintformatEl = new Paintformat(),
+        //this.clearformatEl = new Clearformat(),
+      //],
+      //buildDivider(),
+      //[
+      //  this.formatEl = new Format(),
+      //],
+      //buildDivider(),
+      //[
+      //  this.fontEl = new Font(),
+      //  this.fontSizeEl = new FontSize(),
+      //],
+      //buildDivider(),
+      //[
+      //  this.boldEl = new Bold(),
+      //  this.italicEl = new Italic(),
+      //  this.underlineEl = new Underline(),
+      //  this.strikeEl = new Strike(),
+      //  this.textColorEl = new TextColor(style.color),
+      //],
+      //buildDivider(),
+      //[
+      //  this.fillColorEl = new FillColor(style.bgcolor),
+      //  this.borderEl = new Border(),
+      //  this.mergeEl = new Merge(),
+      //],
+      //buildDivider(),
+      //[
+      //  this.alignEl = new Align(style.align),
+      //  this.valignEl = new Valign(style.valign),
+      //  this.textwrapEl = new Textwrap(),
+      //],
+      //buildDivider(),
+      //[
         this.freezeEl = new Freeze(),
-        this.autofilterEl = new Autofilter(),
-        this.formulaEl = new Formula(),
+        //this.autofilterEl = new Autofilter(),
+        //this.formulaEl = new Formula(),
       ],
     ];
 
-    const { extendToolbar = {} } = data.settings;
+    // const { extendToolbar = {} } = data.settings;
 
-    if (extendToolbar.left && extendToolbar.left.length > 0) {
-      this.items.unshift(buildDivider());
-      const btns = extendToolbar.left.map(genBtn.bind(this));
+    // if (extendToolbar.left && extendToolbar.left.length > 0) {
+    //   this.items.unshift(buildDivider());
+    //   const btns = extendToolbar.left.map(genBtn.bind(this));
 
-      this.items.unshift(btns);
-    }
-    if (extendToolbar.right && extendToolbar.right.length > 0) {
-      this.items.push(buildDivider());
-      const btns = extendToolbar.right.map(genBtn.bind(this));
-      this.items.push(btns);
-    }
+    //   this.items.unshift(btns);
+    // }
+    // if (extendToolbar.right && extendToolbar.right.length > 0) {
+    //   this.items.push(buildDivider());
+    //   const btns = extendToolbar.right.map(genBtn.bind(this));
+    //   this.items.push(btns);
+    // }
 
-    this.items.push([this.moreEl = new More()]);
+    // this.items.push([this.moreEl = new More()]);
 
     this.el = h('div', `${cssPrefix}-toolbar`);
     this.btns = h('div', `${cssPrefix}-toolbar-btns`);
@@ -226,23 +226,23 @@ export default class Toolbar {
     // console.log('canUndo:', data.canUndo());
     this.undoEl.setState(!data.canUndo());
     this.redoEl.setState(!data.canRedo());
-    this.mergeEl.setState(data.canUnmerge(), !data.selector.multiple());
-    this.autofilterEl.setState(!data.canAutofilter());
+    //this.mergeEl.setState(data.canUnmerge(), !data.selector.multiple());
+    //this.autofilterEl.setState(!data.canAutofilter());
     // this.mergeEl.disabled();
     // console.log('selectedCell:', style, cell);
-    const { font, format } = style;
-    this.formatEl.setState(format);
-    this.fontEl.setState(font.name);
-    this.fontSizeEl.setState(font.size);
-    this.boldEl.setState(font.bold);
-    this.italicEl.setState(font.italic);
-    this.underlineEl.setState(style.underline);
-    this.strikeEl.setState(style.strike);
-    this.textColorEl.setState(style.color);
-    this.fillColorEl.setState(style.bgcolor);
-    this.alignEl.setState(style.align);
-    this.valignEl.setState(style.valign);
-    this.textwrapEl.setState(style.textwrap);
+    //const { font, format } = style;
+    //this.formatEl.setState(format);
+    //this.fontEl.setState(font.name);
+    //this.fontSizeEl.setState(font.size);
+    //this.boldEl.setState(font.bold);
+    //this.italicEl.setState(font.italic);
+    //this.underlineEl.setState(style.underline);
+    //this.strikeEl.setState(style.strike);
+    //this.textColorEl.setState(style.color);
+    //this.fillColorEl.setState(style.bgcolor);
+    //this.alignEl.setState(style.align);
+    //this.valignEl.setState(style.valign);
+    //this.textwrapEl.setState(style.textwrap);
     // console.log('freeze is Active:', data.freezeIsActive());
     this.freezeEl.setState(data.freezeIsActive());
   }

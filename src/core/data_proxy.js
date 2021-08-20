@@ -89,13 +89,13 @@ const defaultSettings = {
     minWidth: 60,
   },
   style: {
-    bgcolor: '#ffffff',
+    bgcolor: '#222222',
     align: 'left',
     valign: 'middle',
     textwrap: false,
     strike: false,
     underline: false,
-    color: '#0a0a0a',
+    color: '#FFF',
     font: {
       name: 'Arial',
       size: 10,
