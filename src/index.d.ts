@@ -184,10 +184,15 @@ declare module 'x-data-spreadsheet' {
      */
     loadData(json: Record<string, any>): this;
     /**s
-     * load data
+     * load sheet
      * @param json
      */
     loadSheet(json: Record<string, any>): this;
+    /**s
+     * load sheet with options
+     * @param json
+     */
+    loadSheetWithOptions(json: Record<string, any>, opts?: Options): this;
     /**
      * get data
      */

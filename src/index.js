@@ -42,6 +42,23 @@ class Spreadsheet {
   addSheet(name, active = true) {
     const n = name || `sheet${this.sheetIndex}`;
     const d = new DataProxy(n, this.options);
+    
+    d.change = (...args) => {
+      this.sheet.trigger('change', ...args);
+    };
+    this.datas.push(d);
+    // console.log('d:', n, d, this.datas);
+    if (this.bottombar !== null) {
+      this.bottombar.addItem(n, active);
+    }
+    this.sheetIndex += 1;
+    return d;
+  }
+
+  addSheetWithOptions(name, active = true, opt) {
+    const n = name || `sheet${this.sheetIndex}`;
+    const d = new DataProxy(n, opt);
+    
     d.change = (...args) => {
       this.sheet.trigger('change', ...args);
     };
@@ -83,12 +100,12 @@ class Spreadsheet {
     return this;
   }
 
-  loadSheet(data) {
+  loadSheetWithOptions(data, opt) {
     const ds = Array.isArray(data) ? data : [data];
     if (ds.length > 0) {
       for (let i = 0; i < ds.length; i += 1) {
         const it = ds[i];
-        const nd = this.addSheet(it.name, i === 0);
+        const nd = this.addSheetWithOptions(it.name, i === 0, opt);
         nd.setData(it);
         if (i === 0) {
           this.sheet.resetData(nd);

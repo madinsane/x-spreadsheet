@@ -120,7 +120,14 @@
         console.log('cellStyle(8, 8):', xs.cellStyle(8, 8));
       }, 5000);
 
-      xs.loadSheet([{ name: 'sheet-newlyadded', rows: rows10 }]);
+      xs.loadSheetWithOptions([{ name: 'sheet-newlyadded', rows: rows10 }], { 
+        col: {
+          len: 30
+        },
+        row: {
+          len: 2000
+        }
+      });
     }
   </script>
   <!--script type="text/javascript" src="https://unpkg.com/x-data-spreadsheet@1.0.20/dist/locale/zh-cn.js"></script-->
