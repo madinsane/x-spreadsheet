@@ -179,7 +179,7 @@ export default class Toolbar {
   }
 
   paintformatActive() {
-    return this.paintformatEl.hasClass('active');
+    //return this.paintformatEl.hasClass('active');
   }
 
   paintformatToggle() {

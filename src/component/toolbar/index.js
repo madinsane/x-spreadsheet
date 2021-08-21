@@ -194,16 +194,16 @@ export default class Toolbar {
       this.reset();
       setTimeout(() => {
         initBtns2.call(this);
-        moreResize.call(this);
+        //moreResize.call(this);
       }, 0);
       bind(window, 'resize', () => {
-        moreResize.call(this);
+        //moreResize.call(this);
       });
     }
   }
 
   paintformatActive() {
-    return this.paintformatEl.active();
+    //return this.paintformatEl.active();
   }
 
   paintformatToggle() {
