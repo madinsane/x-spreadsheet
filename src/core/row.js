@@ -3,7 +3,7 @@ import { expr2expr } from './alphabet';
 
 class Rows {
   constructor({ len, height }) {
-    this._ = {};
+    this.content = {};
     this.len = len;
     // default row height
     this.height = height;
@@ -61,12 +61,12 @@ class Rows {
   }
 
   get(ri) {
-    return this._[ri];
+    return this.content[ri];
   }
 
   getOrNew(ri) {
-    this._[ri] = this._[ri] || { cells: {} };
-    return this._[ri];
+    this.content[ri] = this.content[ri] || { cells: {} };
+    return this.content[ri];
   }
 
   getCell(ri, ci) {
@@ -129,14 +129,14 @@ class Rows {
       else dn = dcn;
     }
     for (let i = sri; i <= eri; i += 1) {
-      if (this._[i]) {
+      if (this.content[i]) {
         for (let j = sci; j <= eci; j += 1) {
-          if (this._[i].cells && this._[i].cells[j]) {
+          if (this.content[i].cells && this.content[i].cells[j]) {
             for (let ii = dsri; ii <= deri; ii += rn) {
               for (let jj = dsci; jj <= deci; jj += cn) {
                 const nri = ii + (i - sri);
                 const nci = jj + (j - sci);
-                const ncell = helper.cloneDeep(this._[i].cells[j]);
+                const ncell = helper.cloneDeep(this.content[i].cells[j]);
                 // ncell.text
                 if (autofill && ncell && ncell.text && ncell.text.length > 0) {
                   const { text } = ncell;
@@ -188,10 +188,10 @@ class Rows {
           nci = dstCellRange.sci + (nci - srcCellRange.sci);
         }
         ncellmm[nri] = ncellmm[nri] || { cells: {} };
-        ncellmm[nri].cells[nci] = this._[ri].cells[ci];
+        ncellmm[nri].cells[nci] = this.content[ri].cells[ci];
       });
     });
-    this._ = ncellmm;
+    this.content = ncellmm;
   }
 
   // src: Array<Array<String>>
@@ -221,7 +221,7 @@ class Rows {
       }
       ndata[nri] = row;
     });
-    this._ = ndata;
+    this.content = ndata;
     this.len += n;
   }
 
@@ -241,7 +241,7 @@ class Rows {
         });
       }
     });
-    this._ = ndata;
+    this.content = ndata;
     this.len -= n;
   }
 
@@ -310,9 +310,9 @@ class Rows {
   }
 
   maxCell() {
-    const keys = Object.keys(this._);
+    const keys = Object.keys(this.content);
     const ri = keys[keys.length - 1];
-    const col = this._[ri];
+    const col = this.content[ri];
     if (col) {
       const { cells } = col;
       const ks = Object.keys(cells);
@@ -323,14 +323,14 @@ class Rows {
   }
 
   each(cb) {
-    Object.entries(this._).forEach(([ri, row]) => {
+    Object.entries(this.content).forEach(([ri, row]) => {
       cb(ri, row);
     });
   }
 
   eachCells(ri, cb) {
-    if (this._[ri] && this._[ri].cells) {
-      Object.entries(this._[ri].cells).forEach(([ci, cell]) => {
+    if (this.content[ri] && this.content[ri].cells) {
+      Object.entries(this.content[ri].cells).forEach(([ci, cell]) => {
         cb(ci, cell);
       });
     }
@@ -341,12 +341,12 @@ class Rows {
       this.len = d.len;
       delete d.len;
     }
-    this._ = d;
+    this.content = d;
   }
 
   getData() {
     const { len } = this;
-    return Object.assign({ len }, this._);
+    return Object.assign({ len }, this.content);
   }
 }
 
