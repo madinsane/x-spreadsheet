@@ -71,6 +71,11 @@ class Spreadsheet {
     return d;
   }
 
+  getSheetData() {
+    var sheetIndex = this.bottombar.getCurrentSheetIndex();
+    return this.datas[sheetIndex];
+  }
+
   deleteSheet() {
     if (this.bottombar === null) return;
 

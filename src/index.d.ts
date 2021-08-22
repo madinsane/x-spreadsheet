@@ -1,3 +1,5 @@
+import DataProxy from "./core/data_proxy";
+
 declare module 'x-data-spreadsheet' {
   export interface ExtendToolbarOption {
     tip?: string;
@@ -197,6 +199,7 @@ declare module 'x-data-spreadsheet' {
      * get data
      */
     getData(): Record<string, any>;
+    getSheetData(): DataProxy;
     /**
      * bind handler to change event, including data change and user actions
      * @param callback
