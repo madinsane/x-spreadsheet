@@ -55,9 +55,9 @@ class Spreadsheet {
     return d;
   }
 
-  addSheetWithOptions(name, active = true, opt) {
+  addSheetWithOptions(name, active = true, opt, filePath) {
     const n = name || `sheet${this.sheetIndex}`;
-    const d = new DataProxy(n, opt);
+    const d = new DataProxy(n, opt, filePath);
     
     d.change = (...args) => {
       this.sheet.trigger('change', ...args);
@@ -69,11 +69,6 @@ class Spreadsheet {
     }
     this.sheetIndex += 1;
     return d;
-  }
-
-  getSheetData() {
-    var sheetIndex = this.bottombar.getCurrentSheetIndex();
-    return this.datas[sheetIndex];
   }
 
   deleteSheet() {
@@ -105,12 +100,20 @@ class Spreadsheet {
     return this;
   }
 
-  loadSheetWithOptions(data, opt) {
+  initData() {
+    if (this.bottombar !== null) {
+      this.bottombar.clear();
+    }
+    this.datas = [];
+    return this;
+  }
+
+  loadSheetWithOptions(data, opt, filePath) {
     const ds = Array.isArray(data) ? data : [data];
     if (ds.length > 0) {
       for (let i = 0; i < ds.length; i += 1) {
         const it = ds[i];
-        const nd = this.addSheetWithOptions(it.name, i === 0, opt);
+        const nd = this.addSheetWithOptions(it.name, i === 0, opt, filePath);
         nd.setData(it);
         if (i === 0) {
           this.sheet.resetData(nd);
@@ -121,7 +124,12 @@ class Spreadsheet {
   }
 
   getData() {
-    return this.datas.map(it => it.getData());
+    return this.datas;
+  }
+
+  getSheetData() {
+    var sheetIndex = this.bottombar.getCurrentSheetIndex();
+    return this.datas[sheetIndex];
   }
 
   cellText(ri, ci, text, sheetIndex = 0) {

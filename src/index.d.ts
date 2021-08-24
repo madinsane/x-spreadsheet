@@ -179,7 +179,11 @@ declare module 'x-data-spreadsheet' {
      * remove current sheet
      */
     deleteSheet(): void;
-
+    
+    /**
+     * init spreadsheet
+     */
+    initData(): this;
     /**s
      * load data
      * @param json
@@ -194,11 +198,14 @@ declare module 'x-data-spreadsheet' {
      * load sheet with options
      * @param json
      */
-    loadSheetWithOptions(json: Record<string, any>, opts?: Options): this;
+    loadSheetWithOptions(json: Record<string, any>, opts?: Options, filePath: string): this;
     /**
-     * get data
+     * get all data
      */
-    getData(): Record<string, any>;
+    getData(): DataProxy;
+    /**
+     * get sheet data
+     */
     getSheetData(): DataProxy;
     /**
      * bind handler to change event, including data change and user actions
