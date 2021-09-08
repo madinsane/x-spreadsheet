@@ -862,6 +862,7 @@ export default class Sheet {
     this.print = new Print(data);
     targetEl.children(this.toolbar.el, this.el, this.print.el);
     this.data = data;
+    this.rootEl = targetEl;
     // table
     this.tableEl = h('canvas', `${cssPrefix}-table`);
     // resizer
@@ -965,7 +966,12 @@ export default class Sheet {
 
   getRect() {
     const { data } = this;
-    return { width: data.viewWidth(), height: data.viewHeight() };
+    //return { width: data.viewWidth(), height: data.viewHeight() };
+    return { width: this.getViewWidth(), height: data.viewHeight() };
+  }
+
+  getViewWidth() {
+    return this.rootEl.el.clientWidth;
   }
 
   getTableOffset() {
